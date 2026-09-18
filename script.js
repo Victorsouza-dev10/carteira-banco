@@ -9,6 +9,20 @@ const inputEmail = document.getElementById('email');
 const inputSenha = document.getElementById('senha');
 const checkboxLembrar = document.getElementById('lembrar');
 
+const linkCriarConta = document.getElementById('linkCriarConta');
+const formCriarConta = document.getElementById('formCriarConta');
+const btnCriarConta = document.getElementById('btnCriarConta');
+
+ 
+// Mostra/esconde o formulário de criar conta
+linkCriarConta.addEventListener('click', function (evento) {
+    evento.preventDefault();
+    formCriarConta.style.display = 'block';
+});
+
+
+
+
 
 // carregar a pagina verificar se ja tem email
  const emailSalvo = localStorage.getItem('emailLembrado');
@@ -54,10 +68,37 @@ form.addEventListener('submit', async function (evento) {
     }
        
 
-     inputSenha.value = ''; // limpa a senha por segurança
-    alert('Login realizado com sucesso!');
+        inputSenha.value = '';
+    window.location.href = 'dashboard.html';
     console.log('Email digitado:', email);
     console.log('Senha digitada:', senha);
+});
+
+      // Cria a conta de verdade no Supabase
+btnCriarConta.addEventListener('click', async function () {
+    const novoEmail = document.getElementById('novoEmail').value;
+    const novaSenha = document.getElementById('novaSenha').value;
+
+    if (novoEmail === '' || novaSenha === '') {
+        alert('Preencha e-mail e senha para criar a conta!');
+        return;
+    }
+
+    let { data, error } = await supabaseClient.auth.signUp({
+        email: novoEmail,
+        password: novaSenha,
+    });
+
+    if (error) {
+        alert('Erro ao criar conta: ' + error.message);
+        return;
+    }
+
+    alert('Conta criada! Verifique seu e-mail para confirmar antes de entrar.');
+    formCriarConta.style.display = 'none';
+
+    document.getElementById('novoEmail').value = '';
+    document.getElementById('novaSenha').value = '';
 });
 
   

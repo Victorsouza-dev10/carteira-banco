@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Carteira - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Minha Carteira</h1>
+    <button id="btnSair">Sair</button>
+
+    <h2>💰 Resumo</h2>
+    <p>Saldo total: <span id="saldoTotal">R$ 0,00</span></p>
+
+    <h2>🏦 Contas</h2>
+    <ul id="listaContas">
+        <li>Nenhuma conta cadastrada ainda</li>
+    </ul>
+
+    <h2>💳 Cartões</h2>
+    <ul id="listaCartoes">
+        <li>Nenhum cartão cadastrado ainda</li>
+    </ul>
+
+    <h2>📋 Dívidas</h2>
+    <ul id="listaDividas">
+        <li>Nenhuma dívida cadastrada ainda</li>
+    </ul>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

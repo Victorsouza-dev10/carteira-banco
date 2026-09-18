@@ -1,0 +1,116 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #0B0B0A;
+    color: #F2F0EA;
+}
+
+.pagina-login {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.card-login {
+    background-color: #171613;
+    border: 1px solid #2c2a24;
+    border-radius: 4px;
+    padding: 48px 40px;
+    width: 100%;
+    max-width: 380px;
+}
+
+.card-login h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 0 32px 0;
+    color: #F2F0EA;
+}
+
+.card-login h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    margin: 32px 0 16px 0;
+    color: #F2F0EA;
+}
+
+label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    margin-top: 16px;
+    color: #9c9890;
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    border: 1px solid #35322b;
+    border-radius: 3px;
+    background-color: #0B0B0A;
+    color: #F2F0EA;
+    transition: border-color 0.15s ease;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: #C9962C;
+}
+
+label[for="lembrar"] {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #F2F0EA;
+    cursor: pointer;
+}
+
+input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+    accent-color: #C9962C;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 24px;
+    background-color: #C9962C;
+    color: #0B0B0A;
+    border: none;
+    border-radius: 3px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+button:hover {
+    background-color: #dba939;
+}
+
+p {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #9c9890;
+}
+
+a {
+    color: #C9962C;
+    font-weight: 500;
+}
