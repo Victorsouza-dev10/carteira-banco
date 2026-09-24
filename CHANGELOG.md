@@ -57,3 +57,27 @@ Registro do que foi feito no projeto, da versão mais recente para a mais antiga
 4. Gráfico de pizza por banco e resumo do saldo total
 5. Receitas, despesas, relatórios, metas, investimentos e notificações
 6. Casos de teste (portfólio de QA)
+
+## [V1.3] - 2026-09-25 — Servidor modular e limpeza
+
+### Alterado
+- server.js separado em Gateway, middleware e rotas modulares:
+  - backEnd/supabase.js: conexão única com o Supabase
+  - backEnd/middleware/auth.js: validação do token (identificarUsuario)
+  - backEnd/routes/dashboard.js: rota /api/dashboard
+  - server.js: agora só liga o servidor e conecta as partes (Gateway)
+- Acessar http://localhost:3000 sozinho redireciona automaticamente para a tela de login
+- Mensagem de erro de login padronizada para "E-mail ou senha incorretos."
+
+### Corrigido
+- Botão Sair do dashboard: caminho de volta para o login corrigido
+- index.html do login: removido `</form>` duplicado
+- script.js do login: removidos os console.log com e-mail e senha digitados
+- Alerta de cadastro atualizado (não menciona mais confirmação por e-mail, que está desativada)
+
+### Adicionado
+- Fluxograma v2 (arquivo .drawio) refeito a partir do desenho atualizado, com API Gateway, 10 APIs de negócio e 14 blocos de desenvolvimento
+
+### Aprendizados
+- O projeto deve sempre ser aberto por http://localhost:3000 (nunca direto pelo arquivo no disco), porque os caminhos com "/" no início dependem do servidor
+- Diferença de maiúsculas/minúsculas em nomes de arquivo (ex.: supaBase.js vs supabase.js) funciona no Windows mas quebra em servidores Linux
