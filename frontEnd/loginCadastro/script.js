@@ -70,8 +70,7 @@ form.addEventListener('submit', async function (evento) {
 
         inputSenha.value = '';
     window.location.href = '../dashBoard/dashboard.html';
-    console.log('Email digitado:', email);
-    console.log('Senha digitada:', senha);
+    
 });
 
       // Cria a conta de verdade no Supabase
@@ -90,11 +89,11 @@ btnCriarConta.addEventListener('click', async function () {
     });
 
     if (error) {
-        alert('Erro ao criar conta: ' + error.message);
+        alert('E-mail ou senha incorretos.');
         return;
     }
 
-    alert('Conta criada! Verifique seu e-mail para confirmar antes de entrar.');
+    alert('Conta criada! Agora é só entrar com seu e-mail e senha.');
     formCriarConta.style.display = 'none';
 
     document.getElementById('novoEmail').value = '';
