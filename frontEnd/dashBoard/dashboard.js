@@ -7,7 +7,7 @@ async function carregarDashboard() {
     const { data } = await supabaseClient.auth.getSession();
 
     if (!data.session) {
-        window.location.href = 'index.html';
+        window.location.href = '/frontEnd/loginCadastro/index.html';
         return;
     }
 
@@ -40,5 +40,5 @@ carregarDashboard();
 
 document.getElementById('btnSair').addEventListener('click', async function () {
     await supabaseClient.auth.signOut();
-    window.location.href = 'index.html';
+    window.location.href = '/frontEnd/loginCadastro/index.html';
 });

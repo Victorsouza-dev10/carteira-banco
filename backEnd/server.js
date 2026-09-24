@@ -1,10 +1,12 @@
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 const cors = require('cors');
 const express = require('express');
 const { createClient } = require('@supabase/supabase-js');
 
 const app = express();
 app.use(cors());
+app.use('/frontEnd', express.static(path.join(__dirname, '..', 'frontEnd')));
 const PORTA = 3000;
 
 const supabaseAdmin = createClient(

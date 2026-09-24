@@ -69,7 +69,7 @@ form.addEventListener('submit', async function (evento) {
        
 
         inputSenha.value = '';
-    window.location.href = 'dashboard.html';
+    window.location.href = '../dashBoard/dashboard.html';
     console.log('Email digitado:', email);
     console.log('Senha digitada:', senha);
 });
