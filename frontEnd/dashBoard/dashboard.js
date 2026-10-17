@@ -3,6 +3,50 @@ const SUPABASE_KEY = 'sb_publishable_3iva0sy1DEnRRBcLiJJXkw_jNRKi0L7';
 
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+function formatarReal(valor) {
+    return Number(valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+}
+
+function montarLista(idLista, itens, montarItem, textoVazio) {
+    const lista = document.getElementById(idLista);
+
+    if (itens.length === 0) {
+        lista.innerHTML = `<li class="vazio">${textoVazio}</li>`;
+        return;
+    }
+
+    lista.innerHTML = itens.map(montarItem).join('');
+}
+
+function montarGrafico(contas) {
+    const cores = ['#C9962C', '#E3C27A', '#8A6A22', '#A89F8D', '#5E5846', '#D8CDB0'];
+
+    new Chart(document.getElementById('graficoBancos'), {
+        type: 'doughnut',
+        data: {
+            labels: contas.map(c => c.banco),
+            datasets: [{
+                data: contas.map(c => Number(c.saldo)),
+                backgroundColor: cores,
+                borderColor: '#171613',
+                borderWidth: 3
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            cutout: '62%',
+            plugins: {
+                legend: { position: 'right', labels: { color: '#F2EEE4', padding: 14 } },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => ' ' + formatarReal(ctx.parsed)
+                    }
+                }
+            }
+        }
+    });
+}
+
 async function carregarDashboard() {
     const { data } = await supabaseClient.auth.getSession();
 
@@ -23,17 +67,36 @@ async function carregarDashboard() {
 
     console.log('Dados recebidos do servidor:', dados);
 
-    document.getElementById('listaContas').innerHTML = dados.contas
-        .map(c => `<li>${c.banco}: R$ ${c.saldo}</li>`)
-        .join('');
+    // Saldo total (soma das contas)
+    const saldoTotal = dados.contas.reduce((total, c) => total + Number(c.saldo), 0);
+    document.getElementById('saldoTotal').textContent = formatarReal(saldoTotal);
 
-    document.getElementById('listaCartoes').innerHTML = dados.cartoes
-        .map(c => `<li>${c.banco}: fatura R$ ${c.fatura_atual}</li>`)
-        .join('');
+    // Listas
+    montarLista(
+        'listaContas',
+        dados.contas,
+        c => `<li>${c.banco}: ${formatarReal(c.saldo)}</li>`,
+        'Nenhuma conta cadastrada ainda'
+    );
 
-    document.getElementById('listaDividas').innerHTML = dados.dividas
-        .map(d => `<li>${d.banco} (${d.tipo}): R$ ${d.valor}</li>`)
-        .join('');
+    montarLista(
+        'listaCartoes',
+        dados.cartoes,
+        c => `<li>${c.banco}: fatura ${formatarReal(c.fatura_atual)}</li>`,
+        'Nenhum cartão cadastrado ainda'
+    );
+
+    montarLista(
+        'listaDividas',
+        dados.dividas,
+        d => `<li>${d.banco} (${d.tipo}): ${formatarReal(d.valor)}</li>`,
+        'Nenhuma dívida cadastrada ainda'
+    );
+
+    // Gráfico (só se houver contas)
+    if (dados.contas.length > 0) {
+        montarGrafico(dados.contas);
+    }
 }
 
 carregarDashboard();

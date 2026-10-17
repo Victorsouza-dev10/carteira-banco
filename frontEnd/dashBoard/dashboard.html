@@ -4,32 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minha Carteira - Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../loginCadastro/style.css">
+    <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
 
-    <h1>Minha Carteira</h1>
-    <button id="btnSair">Sair</button>
+    <div class="pagina">
 
-    <h2>💰 Resumo</h2>
-    <p>Saldo total: <span id="saldoTotal">R$ 0,00</span></p>
+        <header class="topo">
+            <h1>Minha Carteira</h1>
+            <button id="btnSair" class="btn-sair">Sair</button>
+        </header>
 
-    <h2>🏦 Contas</h2>
-    <ul id="listaContas">
-        <li>Nenhuma conta cadastrada ainda</li>
-    </ul>
+        <section class="card resumo">
+            <div class="resumo-valores">
+                <p class="rotulo">Saldo total</p>
+                <p class="liquido"><span id="saldoTotal">R$ 0,00</span></p>
+            </div>
+            <div class="grafico-box">
+                <canvas id="graficoBancos"></canvas>
+            </div>
+        </section>
 
-    <h2>💳 Cartões</h2>
-    <ul id="listaCartoes">
-        <li>Nenhum cartão cadastrado ainda</li>
-    </ul>
+        <div class="secoes">
+            <section class="card">
+                <h2>Contas</h2>
+                <ul id="listaContas">
+                    <li class="vazio">Nenhuma conta cadastrada ainda</li>
+                </ul>
+            </section>
 
-    <h2>📋 Dívidas</h2>
-    <ul id="listaDividas">
-        <li>Nenhuma dívida cadastrada ainda</li>
-    </ul>
+            <section class="card">
+                <h2>Cartões</h2>
+                <ul id="listaCartoes">
+                    <li class="vazio">Nenhum cartão cadastrado ainda</li>
+                </ul>
+            </section>
+
+            <section class="card">
+                <h2>Dívidas</h2>
+                <ul id="listaDividas">
+                    <li class="vazio">Nenhuma dívida cadastrada ainda</li>
+                </ul>
+            </section>
+        </div>
+
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
     <script src="dashboard.js"></script>
 </body>
 </html>
