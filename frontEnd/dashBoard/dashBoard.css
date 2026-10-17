@@ -36,8 +36,22 @@ body {
 .btn-sair:hover { background: var(--dourado); color: var(--fundo); }
 
 /* Cards */
-.card { background: var(--card); border: 1px solid var(--borda); border-radius: 14px; padding: 24px; }
-.card h2 { font-family: "Fraunces", serif; font-weight: 500; font-size: 1.2rem; margin-bottom: 16px; }
+
+.card { background: var(--card);
+        border: 1px solid var(--borda); 
+        border-radius: 14px; 
+        padding: 24px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; }
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
+    border-color: var(--dourado);}
+
+.card h2 { font-family: "Fraunces", serif;
+           font-weight: 500;
+           font-size: 1.2rem;
+           margin-bottom: 16px; }
 
 /* Resumo + gráfico */
 .resumo { display: grid; grid-template-columns: 1.1fr 1fr; gap: 24px; align-items: center; margin-bottom: 24px; }
