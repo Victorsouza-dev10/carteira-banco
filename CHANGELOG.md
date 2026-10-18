@@ -80,4 +80,41 @@ Registro do que foi feito no projeto, da versão mais recente para a mais antiga
 
 ### Aprendizados
 - O projeto deve sempre ser aberto por http://localhost:3000 (nunca direto pelo arquivo no disco), porque os caminhos com "/" no início dependem do servidor
-- Diferença de maiúsculas/minúsculas em nomes de arquivo (ex.: supaBase.js vs supabase.js) funciona no Windows mas quebra em servidores Linux
+- Diferença de maiúsculas/minúsculas em nomes de arquivo (ex.: supaBase.js vs supabase.js) funciona no Windows mas quebra em servidores Linux.
+
+## [v1.4] - 2026-10
+
+### Adicionado
+- Novo visual do dashboard, com `dashboard.css` próprio, separado do CSS do login
+- Cards escuros, no mesmo estilo visual do login
+- Resumo com o saldo total
+- Gráfico de rosca com o saldo dividido por banco (Chart.js)
+
+### Alterado
+- Dashboard passou a exibir dados reais das tabelas `contas`, `cartoes` e `dividas`
+
+### Testado
+- Dashboard carregando os dados do usuário logado, buscados pelo servidor Node
+
+## [v1.5] - 2026-10-17
+
+### Adicionado
+- MariaDB Server instalado localmente e conectado ao DBeaver
+- Banco `minha_carteira` (utf8mb4) criado no MariaDB
+- Tabelas `contas`, `cartoes`, `dividas` e `emprestimos`, com as mesmas colunas do Supabase (`id` e `user_id` como `CHAR(36)`, valores em `DECIMAL(12,2)`, `tipo` da dívida como `VARCHAR(10)`)
+- Biblioteca `mysql2` instalada no projeto
+- Variáveis `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD` e `DB_NAME` no `.env`
+- Arquivo `backEnd/db.js` com o pool de conexão ao MariaDB
+
+### Testado
+- Conexão do Node com o MariaDB: consulta na tabela `contas` retornou 0 linhas, como esperado (tabela vazia)
+
+### Decisões
+- O Supabase continua só na autenticação (login e validação do token)
+- Os dados financeiros passam a ser gravados no MariaDB, filtrados pelo `user_id` que vem do token
+- Foi removida a chave estrangeira para `auth.users`, já que essa tabela fica no Supabase
+
+### Pendente
+- Trocar `routes/dashboard.js` para buscar os dados no MariaDB
+- Colocar o MariaDB online
+- Decidir como migrar ou recadastrar os dados que estão no Supabase
